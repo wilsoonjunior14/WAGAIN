@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-
-        game.interaction(motionEvent);
         return true;
     }
 }

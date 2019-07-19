@@ -18,17 +18,13 @@ public class Circle {
         this.y = y;
         this.raio = raio;
         this.paint = paint;
-        System.err.println("X: "+x+" Y:"+y+" Raio: "+raio);
     }
 
-    public void draw(Canvas canvas){
-        canvas.drawCircle(getX(), getY(), getRaio(), getPaint());
-    }
-
-    public void drawLight(Canvas canvas, int color){
+    public void draw(Canvas canvas, int color){
         getPaint().setColor(color);
         canvas.drawCircle(getX(), getY(), getRaio(), getPaint());
     }
+
 
     public int getId() {
         return id;

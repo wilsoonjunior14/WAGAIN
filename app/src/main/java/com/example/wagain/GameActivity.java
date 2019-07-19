@@ -28,9 +28,10 @@ public class GameActivity extends SurfaceView implements SurfaceHolder.Callback,
         getHolder().addCallback(this);
     }
 
-    public void interaction(MotionEvent motionEvent){
-
-        this.game.drawChanges(canvas, motionEvent);
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.game.onTouch(event);
+        return false;
     }
 
     @Override
@@ -67,11 +68,19 @@ public class GameActivity extends SurfaceView implements SurfaceHolder.Callback,
                     this.canvas = getHolder().lockCanvas();
                     this.canvas.drawColor(Color.BLACK);
 
+                    // play the game
+                    this.game.play(this.canvas);
 
-                    this.game.initGame(this.canvas);
+                    Thread.sleep(this.game.delay());
 
-                    Thread.sleep(100);
+                    // draw the moviments
+                    this.game.move_randomly(canvas);
+
+                    // end game
+                    System.out.println("End Game ? "+this.game.end_game);
+
                     getHolder().unlockCanvasAndPost(this.canvas);
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
