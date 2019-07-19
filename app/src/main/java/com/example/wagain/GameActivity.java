@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -20,10 +21,16 @@ import java.util.zip.CheckedOutputStream;
 public class GameActivity extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
     public Game game;
+    public Canvas canvas;
 
     public GameActivity(Context context) {
         super(context);
         getHolder().addCallback(this);
+    }
+
+    public void interaction(MotionEvent motionEvent){
+
+        this.game.drawChanges(canvas, motionEvent);
     }
 
     @Override
@@ -48,7 +55,7 @@ public class GameActivity extends SurfaceView implements SurfaceHolder.Callback,
 
     @Override
     public void run() {
-            Canvas canvas = null;
+            this.canvas = null;
 
             // initialize the game
             this.game = new Game(getWidth(), getHeight(), 5);
@@ -57,14 +64,14 @@ public class GameActivity extends SurfaceView implements SurfaceHolder.Callback,
             while (true) {
 
                 try {
-                    canvas = getHolder().lockCanvas();
-                    canvas.drawColor(Color.BLACK);
+                    this.canvas = getHolder().lockCanvas();
+                    this.canvas.drawColor(Color.BLACK);
 
 
-                    this.game.initGame(canvas);
+                    this.game.initGame(this.canvas);
 
                     Thread.sleep(100);
-                    getHolder().unlockCanvasAndPost(canvas);
+                    getHolder().unlockCanvasAndPost(this.canvas);
 
                 } catch (Exception e) {
                     e.printStackTrace();

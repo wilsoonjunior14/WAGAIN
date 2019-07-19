@@ -3,6 +3,7 @@ package com.example.wagain.models;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
@@ -77,7 +78,7 @@ public class Game {
     }
 
     // click on display for the player
-    public void drawChanges(Canvas canvas){
+    public void drawChanges(Canvas canvas, MotionEvent motionEvent){
 
     }
 }
